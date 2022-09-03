@@ -8,8 +8,8 @@ services:
       - PGID=1000
       - TZ=Europe/London
       - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
-      - USER={USERNAME} #optional
-      - PASS={PASSWORD} #optional
+      - USER=${USERNAME} #optional
+      - PASS=${PASSWORD} #optional
       #- WHITELIST=iplist #optional
       #- PEERPORT=peerport #optional
       #- HOST_WHITELIST=dnsname list #optional
