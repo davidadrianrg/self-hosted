@@ -14,9 +14,9 @@ services:
       - #PEERPORT=peerport #optional
       - #HOST_WHITELIST=dnsname list #optional
     volumes:
-      - /path/to/data:/config
-      - /path/to/downloads:/downloads
-      - /path/to/watch/folder:/watch
+      - ./config:/config
+      - ./downloads:/downloads
+      - ./watch:/watch
     ports:
       - 51413:51413
       - 51413:51413/udp

@@ -5,6 +5,7 @@
 ```
 git clone https://github.com/davidadrianrg/self-hosted.git
 cd self-hosted/transmission
+mkdir config downloads watch
 cp sample.env .env
 sed -i "s/transmission.tuservidor.es/fqdn_you_want/g" .env
 ```

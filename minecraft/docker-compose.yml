@@ -13,4 +13,4 @@ services:
     stdin_open: true
     restart: unless-stopped
     volumes:
-      - ./data/minecraft:/data
+      - ./minecraft_data:/data
