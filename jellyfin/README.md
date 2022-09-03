@@ -5,7 +5,8 @@
 ```
 git clone https://github.com/davidadrianrg/self-hosted.git
 cd self-hosted/jellyfin
-mkdir config cache media media2
+mkdir data
+mkdir data/config data/cache data/media data/media2
 cp sample.env .env
 sed -i "s/jellyfin.tuservidor.es/fqdn_you_want/g" .env
 ```
