@@ -4,7 +4,6 @@ services:
     image: jellyfin/jellyfin
     container_name: jellyfin
     restart: unless-stopped
-    user: 1000:1000
     volumes:
       - ./data/config:/config
       - ./data/cache:/cache
