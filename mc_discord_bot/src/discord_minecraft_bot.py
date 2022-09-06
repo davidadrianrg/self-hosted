@@ -26,7 +26,7 @@ async def status(ctx):
     elif status_mc == "exited":
         response = "OFFLINE"
     else: response = "EN MANTENIMIENTO"
-	await ctx.channel.send(f"El servidor de Minecraft está {response}")
+    await ctx.channel.send(f"El servidor de Minecraft está {response}")
 
 # CREATE A COMMAND TO START THE MINECRAFT SERVER
 @bot.command()
@@ -40,7 +40,7 @@ async def start(ctx):
         mc_server.start()
         response = "El servidor de Minecraft se está iniciando"
     else: response = "El servidor de Minecraft está en mantenimiento"
-	await ctx.channel.send(response)
+    await ctx.channel.send(response)
 
 # CREATE A COMMAND TO STOP THE MINECRAFT SERVER
 @bot.command()
@@ -54,7 +54,7 @@ async def stop(ctx):
     elif status_mc == "exited":
         response = "El servidor de Minecraft ya está apagado"
     else: response = "El servidor de Minecraft está en mantenimiento"
-	await ctx.channel.send(response)
+    await ctx.channel.send(response)
 
 # EXECUTES THE BOT WITH THE SPECIFIED TOKEN.
 bot.run(DISCORD_TOKEN)
