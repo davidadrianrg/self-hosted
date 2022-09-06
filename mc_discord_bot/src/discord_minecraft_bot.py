@@ -1,4 +1,5 @@
 # IMPORT DISCORD.PY. ALLOWS ACCESS TO DISCORD'S API.
+from discord import Intents
 import discord
 # IMPORT DOCKER ALLOWS TO CHECK DOCKER CONTAINERS INFORMATION
 import docker
@@ -13,7 +14,7 @@ from discord.ext import commands
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 # CREATES A NEW BOT OBJECT WITH A SPECIFIED PREFIX. IT CAN BE WHATEVER YOU WANT IT TO BE.
-bot = commands.Bot(command_prefix="$")
+bot = commands.Bot(command_prefix="$", intents=Intents(2))
 
 # CREATE A COMMAND TO SEE THE STATUS OF THE MINECRAFT SERVER (ONLINE/OFFLINE)
 @bot.command()
