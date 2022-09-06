@@ -13,7 +13,7 @@ from discord.ext import commands
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 # CREATES A NEW BOT OBJECT WITH A SPECIFIED PREFIX. IT CAN BE WHATEVER YOU WANT IT TO BE.
-bot = commands.Bot(command_prefix="/")
+bot = commands.Bot(command_prefix="$")
 
 # CREATE A COMMAND TO SEE THE STATUS OF THE MINECRAFT SERVER (ONLINE/OFFLINE)
 @bot.command()
