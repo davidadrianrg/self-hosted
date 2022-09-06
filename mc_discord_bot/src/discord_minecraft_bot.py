@@ -12,9 +12,10 @@ from discord.ext import commands
 
 # GRAB THE API TOKEN FROM THE .ENV FILE.
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+BOT_PERMISSIONS = os.getenv("BOT_PERMISSIONS")
 
 # CREATES A NEW BOT OBJECT WITH A SPECIFIED PREFIX. IT CAN BE WHATEVER YOU WANT IT TO BE.
-bot = commands.Bot(command_prefix="$", intents=Intents(0))
+bot = commands.Bot(command_prefix="$", intents=Intents(BOT_PERMISSIONS))
 
 # CREATE A COMMAND TO SEE THE STATUS OF THE MINECRAFT SERVER (ONLINE/OFFLINE)
 @bot.command()
