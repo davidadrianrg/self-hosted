@@ -14,3 +14,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./data/minecraft_data:/data
+    networks:
+      - minecraft_net
+
+networks:
+  minecraft_net:
+    external: true

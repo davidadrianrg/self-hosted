@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  mc_discord_bot:
+    build: .
+    container_name: mc_discord_bot
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - minecraft_net
+
+networks:
+  minecraft_net:
+    external: true
