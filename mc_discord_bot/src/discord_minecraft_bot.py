@@ -19,7 +19,7 @@ bot = commands.AutoShardedBot(shard_count=1, command_prefix="$", intents=discord
 @bot.command()
 async def status(ctx):
     docker_client = docker.from_env()
-    mc_server = docker_client.get("minecraft")
+    mc_server = docker_client.containers.get("minecraft")
     status_mc = mc_server.status()
     if status_mc == "running":
         response = "ONLINE"
@@ -32,7 +32,7 @@ async def status(ctx):
 @bot.command()
 async def start(ctx):
     docker_client = docker.from_env()
-    mc_server = docker_client.get("minecraft")
+    mc_server = docker_client.containers.get("minecraft")
     status_mc = mc_server.status()
     if status_mc == "running":
         response = "El servidor de Minecraft ya está iniciado"
@@ -46,7 +46,7 @@ async def start(ctx):
 @bot.command()
 async def stop(ctx):
     docker_client = docker.from_env()
-    mc_server = docker_client.get("minecraft")
+    mc_server = docker_client.containers.get("minecraft")
     status_mc = mc_server.status()
     if status_mc == "running":
         mc_server.stop()
