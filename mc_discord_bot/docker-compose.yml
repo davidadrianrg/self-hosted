@@ -6,7 +6,6 @@ services:
     container_name: mc_discord_bot
     environment:
       - DISCORD_TOKEN=${DISCORD_TOKEN}
-      - BOT_PERMISSIONS=292057786368
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
