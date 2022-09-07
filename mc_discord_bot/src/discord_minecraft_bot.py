@@ -15,7 +15,7 @@ DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 BOT_PERMISSIONS = int(os.getenv("BOT_PERMISSIONS"))
 
 # CREATES A NEW BOT OBJECT WITH A SPECIFIED PREFIX. IT CAN BE WHATEVER YOU WANT IT TO BE.
-bot = commands.Bot(command_prefix="$", intents=Intents(BOT_PERMISSIONS))
+bot = commands.AutoShardedBot(shard_count=1, command_prefix="$", intents=Intents(BOT_PERMISSIONS))
 
 # CREATE A COMMAND TO SEE THE STATUS OF THE MINECRAFT SERVER (ONLINE/OFFLINE)
 @bot.command()
