@@ -9,6 +9,7 @@ services:
     environment:
       EULA: "TRUE"
       VERSION: "LATEST" #Minecraft Game Version
+      MEMORY: "512"
     tty: true
     stdin_open: true
     restart: unless-stopped
