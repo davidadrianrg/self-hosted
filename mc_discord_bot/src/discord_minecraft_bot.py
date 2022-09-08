@@ -24,7 +24,7 @@ async def status(ctx):
     docker_client = docker.from_env()
     try:
         mc_server = docker_client.containers.get("minecraft")
-        status_mc = mc_server.status()
+        status_mc = mc_server.status
         logging.info(f"Minecraft server status obtained from docker socket: {status_mc}")
     except Exception as e:
         status_mc = "maintenance"
@@ -43,7 +43,7 @@ async def start(ctx):
     docker_client = docker.from_env()
     try:
         mc_server = docker_client.containers.get("minecraft")
-        status_mc = mc_server.status()
+        status_mc = mc_server.status
         logging.info(f"Minecraft server status obtained from docker socket: {status_mc}")
     except Exception as e:
         status_mc = "maintenance"
@@ -64,7 +64,7 @@ async def stop(ctx):
     docker_client = docker.from_env()
     try:
         mc_server = docker_client.containers.get("minecraft")
-        status_mc = mc_server.status()
+        status_mc = mc_server.status
         logging.info(f"Minecraft server status obtained from docker socket: {status_mc}")
     except Exception as e:
         status_mc = "maintenance"
