@@ -9,6 +9,9 @@ import os
 # IMPORT COMMANDS FROM THE DISCORD.EXT MODULE.
 from discord.ext import commands
 
+# IMPORT LOGGING TO LOG EXECUTION
+import logging
+
 # GRAB THE API TOKEN FROM THE .ENV FILE.
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
@@ -22,14 +25,16 @@ async def status(ctx):
     try:
         mc_server = docker_client.containers.get("minecraft")
         status_mc = mc_server.status()
-    except:
+        logging.info(f"Minecraft server status obtained from docker socket: {status_mc}")
+    except Exception as e:
         status_mc = "maintenance"
+        logging.error(e)
     
     if status_mc == "running":
         response = "ONLINE"
     elif status_mc == "exited":
         response = "OFFLINE"
-    else: response = "EN MANTENIMIENTO"
+    else: response = "en mantenimiento"
     await ctx.channel.send(f"El servidor de Minecraft está {response}")
 
 # CREATE A COMMAND TO START THE MINECRAFT SERVER
@@ -39,14 +44,17 @@ async def start(ctx):
     try:
         mc_server = docker_client.containers.get("minecraft")
         status_mc = mc_server.status()
-    except:
+        logging.info(f"Minecraft server status obtained from docker socket: {status_mc}")
+    except Exception as e:
         status_mc = "maintenance"
+        logging.error(e)
 
     if status_mc == "running":
         response = "El servidor de Minecraft ya está iniciado"
     elif status_mc == "exited":
         mc_server.start()
         response = "El servidor de Minecraft se está iniciando"
+        logging.info("Starting Minecraft server docker container")
     else: response = "El servidor de Minecraft está en mantenimiento"
     await ctx.channel.send(response)
 
@@ -57,12 +65,15 @@ async def stop(ctx):
     try:
         mc_server = docker_client.containers.get("minecraft")
         status_mc = mc_server.status()
-    except:
+        logging.info(f"Minecraft server status obtained from docker socket: {status_mc}")
+    except Exception as e:
         status_mc = "maintenance"
+        logging.error(e)
     
     if status_mc == "running":
         mc_server.stop()
         response = "El servidor de Minecraft se está apagando"
+        logging.info("Stopping Minecraft server docker container")
     elif status_mc == "exited":
         response = "El servidor de Minecraft ya está apagado"
     else: response = "El servidor de Minecraft está en mantenimiento"
