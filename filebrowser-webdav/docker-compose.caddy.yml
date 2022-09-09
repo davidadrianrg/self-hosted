@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  filebrowser:
+    networks:
+      - proxy
+    labels:
+      - caddy="${FQDNF}"
+      - caddy.reverse_proxy="{{upstreams 80}}"
+  webdav:
+    networks:
+      - proxy
+    labels:
+      - caddy="${FQDNW}"
+      - caddy.reverse_proxy="{{upstreams 80}}"
+
+networks:
+  proxy:
+    external: true

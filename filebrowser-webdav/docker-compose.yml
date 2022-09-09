@@ -1,0 +1,22 @@
+version: '3'
+services:
+  filebrowser:
+   image: filebrowser/filebrowser:pi
+   container_name: filebrowser
+   restart: unless-stopped
+   volumes:
+    - /media/hdd:/srv
+    - ./data/filebrowser.db:/database.db
+    - ./data/filebrowser.json:/.filebrowser.json
+  webdav:
+   container_name: webdav
+   image: ugeek/webdav:arm
+   restart: unless-stopped
+   volumes:
+    - /media/hdd:/media
+   environment:
+    - USERNAME=${USER}
+    - PASSWORD=${PASSWORD}
+    - UID=1000
+    - GID=1000
+    - TZ=Europe/Madrid
