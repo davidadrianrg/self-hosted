@@ -15,8 +15,8 @@ services:
    volumes:
     - /media/hdd:/media
    environment:
-    - USERNAME="${USER_WEBDAV}"
-    - PASSWORD="${PASSWORD_WEBDAV}"
+    - USERNAME=${USER_WEBDAV}
+    - PASSWORD=${PASSWORD_WEBDAV}
     - UID=1000
     - GID=1000
     - TZ=Europe/Madrid
