@@ -15,8 +15,8 @@ services:
    volumes:
     - /media/hdd:/media
    environment:
-    - USERNAME=${USER}
-    - PASSWORD=${PASSWORD}
+    - USERNAME="${USER}"
+    - PASSWORD="${PASSWORD}"
     - UID=1000
     - GID=1000
     - TZ=Europe/Madrid
