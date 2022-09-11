@@ -7,7 +7,7 @@ services:
    volumes:
     - /media/ssd:/srv
     - ./data/filebrowser.db:/database.db
-  environment:
+   environment:
     - FB_USERNAME=${FB_USERNAME}
     - FB_PASSWORD=${FB_PASSWORD}
   webdav:
