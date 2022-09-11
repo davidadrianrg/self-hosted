@@ -7,7 +7,9 @@ services:
    volumes:
     - /media/ssd:/srv
     - ./data/filebrowser.db:/database.db
-    - ./data/filebrowser.json:/.filebrowser.json
+  environment:
+    - FB_USERNAME=${FB_USERNAME}
+    - FB_PASSWORD=${FB_PASSWORD}
   webdav:
    container_name: webdav
    image: ugeek/webdav:arm
