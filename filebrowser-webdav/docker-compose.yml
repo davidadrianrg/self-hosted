@@ -5,7 +5,7 @@ services:
    container_name: filebrowser
    restart: unless-stopped
    volumes:
-    - /media/hdd:/srv
+    - /media/ssd:/srv
     - ./data/filebrowser.db:/database.db
     - ./data/filebrowser.json:/.filebrowser.json
   webdav:
@@ -13,7 +13,7 @@ services:
    image: ugeek/webdav:arm
    restart: unless-stopped
    volumes:
-    - /media/hdd:/media
+    - /media/ssd:/media
    environment:
     - USERNAME=${USER_WEBDAV}
     - PASSWORD=${PASSWORD_WEBDAV}

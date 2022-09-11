@@ -7,7 +7,7 @@ services:
     volumes:
       - ./data/config:/config
       - ./data/cache:/cache
-      - /media/hdd/filerun:/media
+      - /media/ssd:/media
       - ./data/media2:/media2:ro
     environment:
       - JELLYFIN_PublishedServerUrl=${FQDN}

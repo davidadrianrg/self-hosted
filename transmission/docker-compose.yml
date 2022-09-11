@@ -6,7 +6,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Europe/Madrid
       - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
       - USER=${USERNAME} #optional
       - PASS=${PASSWORD} #optional
@@ -15,8 +15,8 @@ services:
       #- HOST_WHITELIST=dnsname list #optional
     volumes:
       - ./data/config:/config
-      - ./data/downloads:/downloads
-      - ./data/watch:/watch
+      - /media/ssd/descargas:/downloads
+      - /media/ssd/torrents:/watch
     ports:
       - 51413:51413
       - 51413:51413/udp
