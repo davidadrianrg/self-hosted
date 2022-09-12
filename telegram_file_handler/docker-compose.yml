@@ -4,7 +4,7 @@ services:
     build: .
     container_name: telegram_file_handler
     environment:
-      - TELEGRAM_TOKEN=${TOKEN}
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
       - WATCH_FOLDER=${WATCH_FOLDER}
       - TELEGRAM_USER_ID=${TELEGRAM_USER_ID}
     volumes:
