@@ -39,7 +39,7 @@ def torrent_downloader(update, context) :
        
 
 updater = Updater(TOKEN)
-updater.dispatcher.add_handler(CommandHandler('start', starter), Filters.user(user_id="@username"))
+updater.dispatcher.add_handler(CommandHandler('start', starter), Filters.user(user_id=USER_ID))
 
 updater.dispatcher.add_handler(MessageHandler(Filters.chat_type.private, torrent_downloader))
 
