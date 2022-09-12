@@ -1,0 +1,15 @@
+version: "3"
+services:
+  telegram_file_handler:
+    build: .
+    container_name: telegram_file_handler
+    environment:
+      - TELEGRAM_TOKEN=${TOKEN}
+      - WATCH_FOLDER=${WATCH_FOLDER}
+      - TELEGRAM_USER_ID=${TELEGRAM_USER_ID}
+    volumes:
+      - /media/ssd/peliculas:/peliculas
+      - /media/ssd/series:/series
+      - /media/ssd/descargas:/descargas
+      - /media/ssd/torrents:/torrents
+    restart: unless-stopped
