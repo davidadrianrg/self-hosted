@@ -7,7 +7,7 @@ from time import sleep
 
 TOKEN = getenv('TELEGRAM_TOKEN')
 WATCH_FOLDER = getenv('WATCH_FOLDER')
-USER_ID = getenv('TELEGRAM_USER_ID')
+USER_ID = int(getenv('TELEGRAM_USER_ID'))
 bot = Bot(token=TOKEN)
 
 
@@ -39,7 +39,7 @@ def torrent_downloader(update, context) :
        
 
 updater = Updater(TOKEN)
-updater.dispatcher.add_handler(CommandHandler('start', starter), Filters.user(user_id=int(USER_ID)))
+updater.dispatcher.add_handler(CommandHandler('start', starter, Filters.user(user_id=USER_ID)))
 
 updater.dispatcher.add_handler(MessageHandler(Filters.chat_type.private, torrent_downloader))
 
