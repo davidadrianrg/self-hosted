@@ -1,0 +1,12 @@
+version: '3'
+services:
+  filebrowser:
+   image: filebrowser/filebrowser:pi
+   container_name: filebrowser
+   restart: unless-stopped
+   volumes:
+    - /media/ssd:/srv
+    - ./data/filebrowser.db:/database.db
+   environment:
+    - FB_USERNAME=${FB_USERNAME}
+    - FB_PASSWORD=${FB_PASSWORD}

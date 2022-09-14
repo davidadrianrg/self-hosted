@@ -1,3 +1,4 @@
 */.env
+*/.htpasswd
 */data/
 /mc_discord_bot/venv

@@ -5,13 +5,7 @@ services:
     networks:
       - proxy
     labels:
-      - caddy="${FQDNF}"
-      - caddy.reverse_proxy="{{upstreams 80}}"
-  webdav:
-    networks:
-      - proxy
-    labels:
-      - caddy="${FQDNW}"
+      - caddy="${FQDN}"
       - caddy.reverse_proxy="{{upstreams 80}}"
 
 networks:
