@@ -5,7 +5,6 @@
 ```
 git clone https://github.com/davidadrianrg/self-hosted.git
 cd self-hosted/webdav
-mkdir share
 cp sample.env .env
 sed -i "s/webdav.tuservidor.es/fqdn_you_want/g" .env
 htpasswd -bc htpasswd your-user your-password
