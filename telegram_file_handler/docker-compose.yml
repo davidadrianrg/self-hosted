@@ -8,7 +8,7 @@ services:
       - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
       - WATCH_FOLDER=${WATCH_FOLDER}
       - TELEGRAM_USER_ID=${TELEGRAM_USER_ID}
-      - DOWNLOADS_FOLDER = ${DOWNLOADS_FOLDER}
+      - DOWNLOADS_FOLDER=${DOWNLOADS_FOLDER}
     volumes:
       - /media/ssd/peliculas:/peliculas
       - /media/ssd/series:/series
