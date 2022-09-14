@@ -75,7 +75,7 @@ def extract(update, context) -> None:
                         for file in z.namelist():
                             f_endswith = file.split(".")[-1]
                             part_file = file.split(".")[-2]
-                            if part_file.contains("part") and part_file != "part01": 
+                            if part_file.__contains__("part") and part_file != "part01": 
                                 is_other_part = True
                             else: is_other_part = False
                             if f_endswith == "avi" or f_endswith == "mkv" or f_endswith == "mp4" and not is_other_part:
