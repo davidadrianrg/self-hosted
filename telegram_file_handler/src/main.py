@@ -4,7 +4,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 import os
 from time import sleep
-import shutil
+import logging
 import zipfile
 import rarfile
 
@@ -42,7 +42,8 @@ def torrent_downloader(update, context) :
         print(e)    
 
 def extract(update, context) -> None:
-    update.message.reply_text("Extrayendo ficheros de la carpeta de descargas...")
+    message = update.message.reply_text("Extrayendo ficheros de la carpeta de descargas...")
+    reply_message = "No se ha extraido ningún fichero"
     # Creating a list with all the files to be extracted
     subfolders = [f.path for f in os.scandir(os.path.join(DOWNLOADS_FOLDER, "complete")) if f.is_dir()]
 
@@ -50,15 +51,18 @@ def extract(update, context) -> None:
         for f in os.listdir(sub):
             src_file = os.path.join(sub, f)
             extension = f.split(".")[-1]
+            logging.info(f"Checking to extract file: {src_file}")
             if extension == "zip":
                 try:
                     with zipfile.ZipFile(src_file) as z:
                         for file in z.namelist():
                             if file.endswith(".avi") or file.endswith(".mkv") or file.endswith(".mp4"):
                                 z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
-                        print(f"Extracted file {src_file}")
-                except:
-                    print("Invalid file, error extracting")
+                        logging.info(f"Extracted file {src_file}")
+                    reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
+                except Exception as e:
+                    logging.error(f"Invalid file, error extracting: {e}")
+                    reply_message = "Error extrayendo los archivos"
             if extension == "rar":
                 try:
                     with rarfile.RarFile(src_file) as z:
@@ -70,9 +74,16 @@ def extract(update, context) -> None:
                             else: is_other_part = False
                             if f_endswith == "avi" or f_endswith == "mkv" or f_endswith == "mp4" and not is_other_part:
                                 z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
-                        print(f"Extracted file {src_file}")
-                except:
-                    print("Invalid file, error extracting")
+                        logging.info(f"Extracted file {src_file}")
+                    reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
+                except Exception as e:
+                    logging.error(f"Invalid file, error extracting: {e}")
+                    reply_message = "Error extrayendo los archivos"
+            context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
+            message_id = message.message_id
+            sleep(3)
+            bot.delete_message(chat_id=update.effective_message.chat_id, message_id= message_id) 
+            update.message.reply_text(reply_message)
             
        
 
