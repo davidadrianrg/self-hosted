@@ -15,6 +15,12 @@ DOWNLOADS_FOLDER = os.getenv('DOWNLOADS_FOLDER')
 USER_ID = int(os.getenv('TELEGRAM_USER_ID'))
 bot = Bot(token=TOKEN)
 
+#Setting Logger
+# Gets or creates a logger
+logger = logging.getLogger(__name__)
+
+# Set log level
+logger.setLevel(logging.DEBUG)
 
 def starter(update, context) -> None:
     update.message.reply_text(f'Hola! {update.effective_user.first_name}, Mandame el archivo torrent que quieras poner a descargar')
@@ -51,17 +57,17 @@ def extract(update, context) -> None:
         for f in os.listdir(sub):
             src_file = os.path.join(sub, f)
             extension = f.split(".")[-1]
-            logging.debug(f"Checking to extract file: {src_file}")
+            logger.debug(f"Checking to extract file: {src_file}")
             if extension == "zip":
                 try:
                     with zipfile.ZipFile(src_file) as z:
                         for file in z.namelist():
                             if file.endswith(".avi") or file.endswith(".mkv") or file.endswith(".mp4"):
                                 z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
-                        logging.debug(f"Extracted file {src_file}")
+                        logger.debug(f"Extracted file {src_file}")
                     reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
                 except Exception as e:
-                    logging.error(f"Invalid file, error extracting: {e}")
+                    logger.error(f"Invalid file, error extracting: {e}")
                     reply_message = "Error extrayendo los archivos"
             if extension == "rar":
                 try:
@@ -74,10 +80,10 @@ def extract(update, context) -> None:
                             else: is_other_part = False
                             if f_endswith == "avi" or f_endswith == "mkv" or f_endswith == "mp4" and not is_other_part:
                                 z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
-                        logging.debug(f"Extracted file {src_file}")
+                        logger.debug(f"Extracted file {src_file}")
                     reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
                 except Exception as e:
-                    logging.error(f"Invalid file, error extracting: {e}")
+                    logger.error(f"Invalid file, error extracting: {e}")
                     reply_message = "Error extrayendo los archivos"
             context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
             message_id = message.message_id
