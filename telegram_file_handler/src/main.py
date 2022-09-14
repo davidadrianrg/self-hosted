@@ -8,6 +8,10 @@ import logging
 import zipfile
 import rarfile
 
+# To develop in local withot docker
+#from dotenv import load_dotenv
+#load_dotenv()
+
 TOKEN = os.getenv('TELEGRAM_TOKEN')
 WATCH_FOLDER = os.getenv('WATCH_FOLDER')
 DOWNLOADS_FOLDER = os.getenv('DOWNLOADS_FOLDER')
@@ -57,8 +61,12 @@ def extract(update, context) -> None:
         for f in os.listdir(sub):
             src_file = os.path.join(sub, f)
             extension = f.split(".")[-1]
+            part_file = f.split(".")[-2]
+            if part_file.__contains__("part") and part_file != "part01": 
+                is_other_part = True
+            else: is_other_part = False
             logger.debug(f"Checking to extract file: {src_file}")
-            if extension == "zip":
+            if extension == "zip" and not is_other_part:
                 try:
                     with zipfile.ZipFile(src_file) as z:
                         for file in z.namelist():
@@ -69,27 +77,24 @@ def extract(update, context) -> None:
                 except Exception as e:
                     logger.error(f"Invalid file, error extracting: {e}")
                     reply_message = "Error extrayendo los archivos"
-            if extension == "rar":
+            if extension == "rar" and not is_other_part:
                 try:
                     with rarfile.RarFile(src_file) as z:
                         for file in z.namelist():
                             f_endswith = file.split(".")[-1]
-                            part_file = file.split(".")[-2]
-                            if part_file.__contains__("part") and part_file != "part01": 
-                                is_other_part = True
-                            else: is_other_part = False
-                            if f_endswith == "avi" or f_endswith == "mkv" or f_endswith == "mp4" and not is_other_part:
-                                z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
-                        logger.debug(f"Extracted file {src_file}")
-                    reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
+                            if f_endswith == "avi" or f_endswith == "mkv" or f_endswith == "mp4":
+                                #z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
+                                reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
+                                logger.debug(f"Extracted file {src_file}")
+                            else: logger.debug(f"No se ha extraido el fichero: {src_file}")
                 except Exception as e:
                     logger.error(f"Invalid file, error extracting: {e}")
                     reply_message = "Error extrayendo los archivos"
-            context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
-            message_id = message.message_id
-            sleep(3)
-            bot.delete_message(chat_id=update.effective_message.chat_id, message_id= message_id) 
-            update.message.reply_text(reply_message)
+    context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
+    message_id = message.message_id
+    sleep(3)
+    bot.delete_message(chat_id=update.effective_message.chat_id, message_id= message_id) 
+    update.message.reply_text(reply_message)
             
        
 
