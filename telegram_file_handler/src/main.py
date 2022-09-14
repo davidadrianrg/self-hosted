@@ -8,7 +8,7 @@ import logging
 import zipfile
 import rarfile
 
-# To develop in local withot docker
+# To develop in local without docker
 #from dotenv import load_dotenv
 #load_dotenv()
 
