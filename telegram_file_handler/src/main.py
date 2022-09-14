@@ -83,7 +83,7 @@ def extract(update, context) -> None:
                         for file in z.namelist():
                             f_endswith = file.split(".")[-1]
                             if f_endswith == "avi" or f_endswith == "mkv" or f_endswith == "mp4":
-                                #z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
+                                z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
                                 reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
                                 logger.debug(f"Extracted file {src_file}")
                             else: logger.debug(f"No se ha extraido el fichero: {src_file}")
