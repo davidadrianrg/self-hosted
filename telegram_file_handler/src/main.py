@@ -51,14 +51,14 @@ def extract(update, context) -> None:
         for f in os.listdir(sub):
             src_file = os.path.join(sub, f)
             extension = f.split(".")[-1]
-            logging.info(f"Checking to extract file: {src_file}")
+            logging.debug(f"Checking to extract file: {src_file}")
             if extension == "zip":
                 try:
                     with zipfile.ZipFile(src_file) as z:
                         for file in z.namelist():
                             if file.endswith(".avi") or file.endswith(".mkv") or file.endswith(".mp4"):
                                 z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
-                        logging.info(f"Extracted file {src_file}")
+                        logging.debug(f"Extracted file {src_file}")
                     reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
                 except Exception as e:
                     logging.error(f"Invalid file, error extracting: {e}")
@@ -74,7 +74,7 @@ def extract(update, context) -> None:
                             else: is_other_part = False
                             if f_endswith == "avi" or f_endswith == "mkv" or f_endswith == "mp4" and not is_other_part:
                                 z.extract(file, path=os.path.join(DOWNLOADS_FOLDER, "extracted"))
-                        logging.info(f"Extracted file {src_file}")
+                        logging.debug(f"Extracted file {src_file}")
                     reply_message = "Ficheros extraidos satisfactoriamente" # In case that all go ok
                 except Exception as e:
                     logging.error(f"Invalid file, error extracting: {e}")
