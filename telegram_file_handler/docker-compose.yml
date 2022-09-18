@@ -13,8 +13,8 @@ services:
       - SERIES_FOLDER=${SERIES_FOLDER}
       - IMDB_TOKEN=${IMDB_TOKEN}
     volumes:
-      - /media/ssd/peliculas:/app/peliculas
-      - /media/ssd/series:/app/series
-      - /media/ssd/descargas:/app/descargas
-      - /media/ssd/torrents:/app/torrents
+      - /media/ssd/peliculas:/home/bot/app/peliculas
+      - /media/ssd/series:/home/bot/app/series
+      - /media/ssd/descargas:/home/bot/app/descargas
+      - /media/ssd/torrents:/home/bot/app/torrents
     restart: unless-stopped
