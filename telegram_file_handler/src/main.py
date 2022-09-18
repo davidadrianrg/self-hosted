@@ -103,8 +103,8 @@ def extracter(update, context) -> None:
 
 def cleaner(update, context) -> None:
     #Call firstly the extracter and classifier functions
-    extracter()
-    classifier()
+    extracter(update, context)
+    classifier(update, context)
     #Proceed to clean the directory
     message = update.message.reply_text("Limpiando carpeta de descargas...")
     remove_folder = os.path.join(WATCH_FOLDER, "complete")
