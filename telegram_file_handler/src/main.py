@@ -7,6 +7,9 @@ from time import sleep
 import logging
 import zipfile
 import rarfile
+import requests
+import shutil
+import json
 
 # To develop in local without docker
 #from dotenv import load_dotenv
@@ -15,7 +18,9 @@ import rarfile
 TOKEN = os.getenv('TELEGRAM_TOKEN')
 WATCH_FOLDER = os.getenv('WATCH_FOLDER')
 DOWNLOADS_FOLDER = os.getenv('DOWNLOADS_FOLDER')
-#FILMS_FOLDER = os.getenv('FILMS_FOLDER')
+FILMS_FOLDER = os.getenv('FILMS_FOLDER')
+SERIES_FOLDER = os.getenv('SERIES_FOLDER')
+IMDB_TOKEN = os.getenv('IMDB_TOKEN')
 USER_ID = int(os.getenv('TELEGRAM_USER_ID'))
 bot = Bot(token=TOKEN)
 
@@ -51,7 +56,7 @@ def torrent_downloader(update, context) :
     except Exception as e:
         print(e)    
 
-def extract(update, context) -> None:
+def extracter(update, context) -> None:
     message = update.message.reply_text("Extrayendo ficheros de la carpeta de descargas...")
     reply_message = "No se ha extraido ningún fichero"
     # Creating a list with all the files to be extracted
@@ -95,12 +100,76 @@ def extract(update, context) -> None:
     sleep(3)
     bot.delete_message(chat_id=update.effective_message.chat_id, message_id= message_id) 
     update.message.reply_text(reply_message)
+
+def cleaner(update, context) -> None:
+    #Call firstly the extracter and classifier functions
+    extracter()
+    classifier()
+    #Proceed to clean the directory
+    message = update.message.reply_text("Limpiando carpeta de descargas...")
+    remove_folder = os.path.join(WATCH_FOLDER, "complete")
+    logger.debug(f"Limpiando carpeta de descargas en {remove_folder}")
+    os.remove(remove_folder)
+    context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
+    message_id = message.message_id
+    sleep(3)
+    bot.delete_message(chat_id=update.effective_message.chat_id, message_id= message_id) 
+    update.message.reply_text("Carpeta de descargas vaciada")
+
+def classifier(update, context) -> None:
+    message = update.message.reply_text("Colocando cada fichero en su carpeta destino")
+    reply_message = "No se ha clasificado ningún fichero"
+    # Creating a list with all the files to be moved
+    subfolders = [f.path for f in os.scandir(os.path.join(DOWNLOADS_FOLDER, "complete")) if f.is_dir()]
+    subfolders.append([f.path for f in os.scandir(os.path.join(DOWNLOADS_FOLDER, "extracted")) if f.is_dir()])
+
+    for sub in subfolders:
+        for f in os.listdir(sub):
+            src_file = os.path.join(sub, f)
+            extension = f.split(".")[-1]
             
-       
+            if extension == "avi" or extension == "mkv" or extension == "mp4":
+                logger.debug(f"Checking to extract file: {src_file}")
+                try:
+                    # Make an api call to imdb to know if a file is a film or a serie
+                    file_type = api_classify(f)
+                    if file_type == "Movie":
+                        shutil.move(src_file, os.path.join(FILMS_FOLDER, f))
+                        reply_message = "Ficheros clasificados con éxito"
+                    elif file_type == "TVSeries":
+                        shutil.move(src_file, os.path.join(SERIES_FOLDER, f))
+                        reply_message = "Ficheros clasificados con éxito"
+                    else: reply_message = "Al menos un fichero no ha podido clasificarse"
+                    reply_message = "Ficheros clasificados con éxito"
+                except Exception as e:
+                    logger.error(f"Error classifying the file: {e}")
+                    reply_message = "Error clasificando los archivos"
+    context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
+    message_id = message.message_id
+    sleep(3)
+    bot.delete_message(chat_id=update.effective_message.chat_id, message_id= message_id) 
+    update.message.reply_text(reply_message)
+
+
+def api_classify(file_name):
+    url = f"https://imdb-api.com/es/API/Search/{IMDB_TOKEN}/{file_name}"
+    response = requests.request("GET", url, headers={}, data = {})
+    search = json.loads(response.text.encode('utf8'))
+    # Get the id of the film or serie
+    id = search.get("results")[0].get("id")
+
+    url_title = f"https://imdb-api.com/es/API/Title/{IMDB_TOKEN}/{id}"
+    # Get more info about the film or serie
+    response = requests.request("GET", url_title, headers={}, data = {})
+    # Get if it is a Movie or a TVSeries
+    file_type = json.loads(response.text.encode('utf8')).get("type")
+    return file_type
 
 updater = Updater(TOKEN)
 updater.dispatcher.add_handler(CommandHandler('start', starter, Filters.user(user_id=USER_ID)))
-updater.dispatcher.add_handler(CommandHandler('extract', extract, Filters.user(user_id=USER_ID)))
+updater.dispatcher.add_handler(CommandHandler('extract', extracter, Filters.user(user_id=USER_ID)))
+updater.dispatcher.add_handler(CommandHandler('clean', cleaner, Filters.user(user_id=USER_ID)))
+updater.dispatcher.add_handler(CommandHandler('classify', classifier, Filters.user(user_id=USER_ID)))
 
 updater.dispatcher.add_handler(MessageHandler(Filters.chat_type.private, torrent_downloader))
 

@@ -2,16 +2,19 @@ version: "3"
 services:
   telegram_file_handler:
     build: .
-    image: davidadrianrg/telegram_file_handler:v1.0
+    image: davidadrianrg/telegram_file_handler:v1.1
     container_name: telegram_file_handler
     environment:
       - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
       - WATCH_FOLDER=${WATCH_FOLDER}
       - TELEGRAM_USER_ID=${TELEGRAM_USER_ID}
       - DOWNLOADS_FOLDER=${DOWNLOADS_FOLDER}
+      - FILMS_FOLDER=${FILMS_FOLDER}
+      - SERIES_FOLDER=${SERIES_FOLDER}
+      - IMDB_TOKEN=${IMDB_TOKEN}
     volumes:
-      - /media/ssd/peliculas:/peliculas
-      - /media/ssd/series:/series
-      - /media/ssd/descargas:/descargas
-      - /media/ssd/torrents:/torrents
+      - /media/ssd/peliculas:/app/peliculas
+      - /media/ssd/series:/app/series
+      - /media/ssd/descargas:/app/descargas
+      - /media/ssd/torrents:/app/torrents
     restart: unless-stopped
