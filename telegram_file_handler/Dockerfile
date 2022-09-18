@@ -1,12 +1,13 @@
 FROM python:slim
 
 RUN groupadd -r bot && useradd --no-log-init -r -g bot bot
-USER bot
 
-WORKDIR /app
+WORKDIR /home/bot/app
 
-COPY ./src/* /app/
+COPY ./src/* /home/bot/app/
 
 RUN pip install -r requirements.txt
+
+USER bot
 
 CMD python main.py
