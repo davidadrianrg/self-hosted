@@ -6,5 +6,5 @@ services:
     container_name: webdav
     restart: unless-stopped
     volumes:
-      - /media/ssd:/share
+      - ~/media:/share
       - ./htpasswd:/opt/nginx/conf/.htpasswd

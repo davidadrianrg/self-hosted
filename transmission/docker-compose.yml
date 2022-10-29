@@ -15,8 +15,8 @@ services:
       #- HOST_WHITELIST=dnsname list #optional
     volumes:
       - ./data/config:/config
-      - /media/ssd/descargas:/downloads
-      - /media/ssd/torrents:/watch
+      - ~/media/descargas:/downloads
+      - ~/media/torrents:/watch
     ports:
       - 51413:51413
       - 51413:51413/udp
