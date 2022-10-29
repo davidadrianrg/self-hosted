@@ -2,3 +2,4 @@
 */.htpasswd
 */data/
 /*/venv
+webdav/htpasswd
