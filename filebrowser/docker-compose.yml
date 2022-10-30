@@ -5,7 +5,7 @@ services:
    container_name: filebrowser
    restart: unless-stopped
    volumes:
-    - /home/media:/srv
+    - /home/david/media:/srv
     - ./data/filebrowser.db:/database.db
    environment:
     - FB_USERNAME=${FB_USERNAME}
