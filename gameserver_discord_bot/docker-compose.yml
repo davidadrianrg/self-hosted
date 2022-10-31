@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  mc_discord_bot:
+  gameserver_discord_bot:
     build: .
     image: davidadrianrg/gameserver_discord_bot:v1.0
     container_name: gameserver_discord_bot
