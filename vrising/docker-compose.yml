@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  vrising:
+    container_name: vrising
+    image: trueosiris/vrising
+    environment:
+      - TZ=Europe/Madrid
+      - SERVERNAME=Nabizas de Samain
+    volumes:
+      - './server:/mnt/vrising/server:rw'
+      - './data:/mnt/vrising/persistentdata:rw'
+    ports:
+      - '9876:9876/udp'
+      - '9877:9877/udp'
+    networks:
+      - vrising_net
+
+networks:
+  vrising_net:
+    external: true
