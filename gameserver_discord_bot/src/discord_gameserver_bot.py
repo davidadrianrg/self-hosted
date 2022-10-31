@@ -20,7 +20,7 @@ bot = commands.AutoShardedBot(shard_count=1, command_prefix="$", intents=discord
 
 # CREATE A COMMAND TO SEE THE STATUS OF THE MINECRAFT SERVER (ONLINE/OFFLINE)
 @bot.command()
-async def status(game: str, ctx):
+async def status(ctx, game: str):
     docker_client = docker.from_env()
     try:
         game_server = docker_client.containers.get(game.lower())
@@ -39,7 +39,7 @@ async def status(game: str, ctx):
 
 # CREATE A COMMAND TO START THE MINECRAFT SERVER
 @bot.command()
-async def start(game: str, ctx):
+async def start(ctx, game: str):
     docker_client = docker.from_env()
     try:
         game_server = docker_client.containers.get(game.lower())
@@ -60,7 +60,7 @@ async def start(game: str, ctx):
 
 # CREATE A COMMAND TO STOP THE MINECRAFT SERVER
 @bot.command()
-async def stop(game: str, ctx):
+async def stop(ctx, game: str):
     docker_client = docker.from_env()
     try:
         game_server = docker_client.containers.get(game.lower())
