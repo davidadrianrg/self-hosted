@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  mc_discord_bot:
+    build: .
+    image: davidadrianrg/gameserver_discord_bot:v1.0
+    container_name: gameserver_discord_bot
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

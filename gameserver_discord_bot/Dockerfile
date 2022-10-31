@@ -6,4 +6,4 @@ COPY ./src/* /app/
 
 RUN pip install -r requirements.txt
 
-CMD python discord_minecraft_bot.py
+CMD python discord_gameserver_bot.py
