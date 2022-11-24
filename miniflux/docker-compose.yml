@@ -2,6 +2,7 @@ version: "3.7"
 services:
   miniflux:
     image: miniflux/miniflux:latest
+    container_name: miniflux
     init: true
     depends_on:
       - db
@@ -12,6 +13,7 @@ services:
       - .env
   db:
     image: postgres:latest
+    container_name: miniflux_db
     init: true
     env_file:
       - .env
