@@ -17,6 +17,7 @@ services:
 
   db_for_firefly:
     image: yobasystems/alpine-mariadb:latest
+    container_name: db_for_firefly
     restart: unless-stopped
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
