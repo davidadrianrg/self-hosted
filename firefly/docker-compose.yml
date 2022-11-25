@@ -1,36 +1,32 @@
 version: '3.3'
 
 services:
-  firefly_app:
+
+  fireflyiii:
     image: fireflyiii/core:latest
-    container_name: firefly
-    restart: always
+    container_name: fireflyiii
+    restart: unless-stopped
     volumes:
-      - firefly_iii_upload:/var/www/html/storage/upload
-    env_file: .env
+      - ./firefly_upload:/var/www/html/storage/upload
+    env_file:
+      - .env
+    depends_on:
+      - db_for_firefly
     networks:
       - internal
-    depends_on:
-      - firefly_db
 
-  firefly_db:
-    image: mariadb
-    container_name: firefly_db 
-    hostname: fireflyiiidb
-    restart: always
+  db_for_firefly:
+    image: yobasystems/alpine-mariadb:latest
+    restart: unless-stopped
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
     volumes:
-      - firefly_iii_db:/var/lib/mysql
+      - ./firefly_db:/var/lib/mysql
     networks:
       - internal
-    
-volumes:
-   firefly_iii_upload:
-   firefly_iii_db:
 
 networks:
   internal:
