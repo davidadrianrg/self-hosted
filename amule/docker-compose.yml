@@ -1,0 +1,18 @@
+version: '3'
+services:
+  amule:
+    image: tchabaud/amule
+    container_name: amule
+    restart: unless-stopped
+    volumes:
+      - ./data/config:/home/amule/.aMule 
+      - /home/david/media/descargas/complete:/incoming 
+      - /home/david/media/descargas/incomplete:/temp
+    environment:
+      - WEBUI_TEMPLATE=AmuleWebUI-Reloaded
+      - WEBUI_PWD=${AMULE_WEBUI_PWD}
+      - PUID=5000
+      - GUID=5000
+    ports:
+      - 4662:4662
+      - 4672:4672/udp

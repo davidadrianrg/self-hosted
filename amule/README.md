@@ -1,14 +1,14 @@
-# Transmission
+# AMULE WEB SERVER
 
 ## Clone the repository
 
 ```
 git clone https://github.com/davidadrianrg/self-hosted.git
-cd self-hosted/transmission
+cd self-hosted/amule
 mkdir data 
-mkdir data/config data/downloads data/watch
+mkdir data/config
 cp sample.env .env
-sed -i "s/transmission.tuservidor.es/fqdn_you_want/g" .env
+sed -i "s/amule.tuservidor.es/fqdn_you_want/g" .env
 ```
 
 If you want to work with Caddy reverse proxy,
