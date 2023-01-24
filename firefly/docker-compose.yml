@@ -13,7 +13,6 @@ services:
     depends_on:
       - db_for_firefly
     networks:
-      - public
       - private
 
   db_for_firefly:
@@ -32,6 +31,4 @@ services:
 
 networks:
   private:
-    external: true
-  public:
     external: true

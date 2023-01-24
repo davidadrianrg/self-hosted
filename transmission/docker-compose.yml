@@ -21,9 +21,3 @@ services:
       - 51413:51413
       - 51413:51413/udp
     restart: unless-stopped
-    networks:
-      - public
-
-networks:
-  public:
-    external: true

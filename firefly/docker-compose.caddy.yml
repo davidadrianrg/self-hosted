@@ -3,11 +3,11 @@ version: '3'
 services:
   fireflyiii:
     networks:
-      - public
+      - private
     labels:
       - caddy="${FQDN}"
       - caddy.reverse_proxy="{{upstreams 8080}}"
 
 networks:
-  public:
+  private:
     external: true
