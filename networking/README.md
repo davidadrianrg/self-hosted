@@ -5,7 +5,7 @@
 ```
 git clone https://github.com/davidadrianrg/self-hosted.git
 cd self-hosted/networking
-docker-compose up -d
+./docker-networking.sh
 ```
 
 If you want to check the network creation:
