@@ -1,4 +1,0 @@
-python-telegram-bot==13.14
-rarfile==4.0
-zipfile39==0.0.6.0
-requests==2.28.1

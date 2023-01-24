@@ -3,11 +3,11 @@ version: '3'
 services:
   amule:
     networks:
-      - proxy
+      - public
     labels:
       - caddy="${FQDN}"
       - caddy.reverse_proxy="{{upstreams 4711}}"
 
 networks:
-  proxy:
+  public:
     external: true

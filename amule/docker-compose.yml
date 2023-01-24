@@ -16,3 +16,9 @@ services:
     ports:
       - 4662:4662
       - 4672:4672/udp
+    networks:
+      - public
+  
+networks:
+  public:
+    external: true

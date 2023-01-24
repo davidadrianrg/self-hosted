@@ -3,11 +3,11 @@ version: '3'
 services:
   filebrowser:
     networks:
-      - proxy
+      - public
     labels:
       - caddy="${FQDN}"
       - caddy.reverse_proxy="{{upstreams 80}}"
 
 networks:
-  proxy:
+  public:
     external: true

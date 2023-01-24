@@ -14,8 +14,8 @@ services:
       - '9876:9876/udp'
       - '9877:9877/udp'
     networks:
-      - vrising_net
+      - gaming
 
 networks:
-  vrising_net:
+  gaming:
     external: true

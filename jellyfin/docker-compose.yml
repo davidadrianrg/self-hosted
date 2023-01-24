@@ -11,3 +11,9 @@ services:
       - ./data/media2:/media2:ro
     environment:
       - JELLYFIN_PublishedServerUrl=${FQDN}
+    networks:
+      - public
+
+networks:
+  public:
+    external: true

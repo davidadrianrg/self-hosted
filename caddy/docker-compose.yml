@@ -9,14 +9,14 @@ services:
     environment:
       - CADDY_INGRESS_NETWORKS=proxy
     networks:
-      - proxy
+      - public
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data/caddy_data:/data
     restart: unless-stopped
 
 networks:
-  proxy:
+  public:
     external: true
 
 volumes:

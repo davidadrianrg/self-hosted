@@ -3,11 +3,11 @@ version: '3'
 services:
   transmission:
     networks:
-      - proxy
+      - public
     labels:
       - caddy="${FQDN}"
       - caddy.reverse_proxy="{{upstreams 9091}}"
 
 networks:
-  proxy:
+  public:
     external: true

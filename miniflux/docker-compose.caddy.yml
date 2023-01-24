@@ -3,11 +3,11 @@ version: "3.7"
 services:
   miniflux:
     networks:
-      - proxy
+      - public
     labels:
       - caddy="${FQDN}"
       - caddy.reverse_proxy="{{upstreams 8080}}"
 
 networks:
-  proxy:
+  public:
     external: true

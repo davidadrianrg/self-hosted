@@ -13,7 +13,8 @@ services:
     depends_on:
       - db_for_firefly
     networks:
-      - internal
+      - public
+      - private
 
   db_for_firefly:
     image: yobasystems/alpine-mariadb:latest
@@ -27,7 +28,10 @@ services:
     volumes:
       - ./firefly_db:/var/lib/mysql
     networks:
-      - internal
+      - private
 
 networks:
-  internal:
+  private:
+    external: true
+  public:
+    external: true
