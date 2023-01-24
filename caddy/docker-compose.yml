@@ -7,7 +7,7 @@ services:
       - 80:80
       - 443:443
     environment:
-      - CADDY_INGRESS_NETWORKS=proxy
+      - CADDY_INGRESS_NETWORKS=public
     networks:
       - public
     volumes:
