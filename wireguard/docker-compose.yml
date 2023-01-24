@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  wg-easy:
+    image: weejewel/wg-easy
+    container_name: wireguard
+    environment:
+    # ⚠️ Required:
+    # Change this to your host's public address
+    - WG_HOST=${FQDN}
+
+    # Optional:
+    - PASSWORD=${WG_PASSWORD}
+    # - WG_PORT=51820
+    - WG_DEFAULT_ADDRESS=192.168.2.x
+    - WG_DEFAULT_DNS=9.9.9.9, 149.112.112.112
+
+    volumes:
+    - ./data:/etc/wireguard
+    ports:
+    - "51820:51820/udp"
+    - "85:51821/tcp"
+    networks:
+    - host
+    - private
+    restart: unless-stopped
+    cap_add:
+    - NET_ADMIN
+    - SYS_MODULE
+    sysctls:
+    - net.ipv4.conf.all.src_valid_mark=1
+
+networks:
+  private:
+    external: true
+  host:
+    external: true
