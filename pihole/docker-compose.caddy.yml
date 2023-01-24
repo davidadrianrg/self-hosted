@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  amule:
+  pihole:
     networks:
       - public
     labels:
       - caddy="${FQDN}"
-      - caddy.reverse_proxy="{{upstreams 4711}}"
+      - caddy.reverse_proxy="{{upstreams 80}}"
       - caddy.@denied.not.remote_ip="private_ranges"
       - caddy.abort=@denied
 

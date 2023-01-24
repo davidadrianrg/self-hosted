@@ -10,7 +10,7 @@ services:
       - "${YOUR_IP}:53:53/tcp"
       - "${YOUR_IP}:53:53/udp"
       #- "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-      - "8080:80/tcp"
+      #- "80:80/tcp" #Using caddy
     environment:
       TZ: 'Europe/Madrid'
       WEBPASSWORD: '${PIHOLE_PASSWORD}'

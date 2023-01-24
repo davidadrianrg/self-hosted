@@ -18,7 +18,7 @@ services:
     - ./data:/etc/wireguard
     ports:
     - "51820:51820/udp"
-    - "85:51821/tcp"
+    #- "85:51821/tcp" Using caddy
     networks:
     - public
     - private

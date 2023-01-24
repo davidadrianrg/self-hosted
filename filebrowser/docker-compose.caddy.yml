@@ -3,11 +3,13 @@ version: '3'
 services:
   filebrowser:
     networks:
-      - private
+      - public
     labels:
       - caddy="${FQDN}"
-      - caddy.reverse_proxy="{{upstreams 80}}"
+      - caddy.reverse_proxy="{{upstreams 51821}}"
+      - caddy.@denied.not.remote_ip="private_ranges"
+      - caddy.abort=@denied
 
 networks:
-  private:
+  public:
     external: true
