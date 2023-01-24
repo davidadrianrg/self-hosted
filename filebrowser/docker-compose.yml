@@ -10,9 +10,3 @@ services:
    environment:
     - FB_USERNAME=${FB_USERNAME}
     - FB_PASSWORD=${FB_PASSWORD}
-   networks:
-      - private
-
-networks:
-  private:
-    external: true
