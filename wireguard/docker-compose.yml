@@ -20,7 +20,7 @@ services:
     - "51820:51820/udp"
     - "85:51821/tcp"
     networks:
-    - host
+    - public
     - private
     restart: unless-stopped
     cap_add:
@@ -32,5 +32,5 @@ services:
 networks:
   private:
     external: true
-  host:
+  public:
     external: true
