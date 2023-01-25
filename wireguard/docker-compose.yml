@@ -13,6 +13,7 @@ services:
     # - WG_PORT=51820
     - WG_DEFAULT_ADDRESS=192.168.2.x
     - WG_DEFAULT_DNS=9.9.9.9, 149.112.112.112
+    - WG_ALLOWED_IPS=192.168.1.0/24 #To be able to see other lan devices
 
     volumes:
     - ./data:/etc/wireguard
