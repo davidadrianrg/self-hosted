@@ -5,7 +5,7 @@ services:
       - public
     labels:
       - caddy="${FQDN}"
-      - caddy.reverse_proxy="{{upstreams 80}}"
+      - caddy.reverse_proxy="{{upstreams 8123}}"
       - caddy.@denied.not.remote_ip="private_ranges"
       - caddy.abort=@denied
 

@@ -17,10 +17,4 @@ services:
       interval: 90s
       timeout: 60s
       retries: 2
-    networks:
-      - host
     restart: unless-stopped
-
-networks:
-  host:
-    external: true
