@@ -14,6 +14,7 @@ services:
     environment:
       TZ: 'Europe/Madrid'
       WEBPASSWORD: '${PIHOLE_PASSWORD}'
+      DNSMASQ_LISTENING: 'all'
     # Volumes store your data between container upgrades
     volumes:
       - './data/etc-pihole:/etc/pihole'
