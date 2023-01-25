@@ -6,6 +6,7 @@ services:
       - public
     labels:
       - caddy="wireguard.${FQDN}"
+      - caddy.tls="internal"
       - caddy.reverse_proxy="{{upstreams 51821}}"
       - caddy.@denied.not.remote_ip="private_ranges"
       - caddy.abort=@denied
