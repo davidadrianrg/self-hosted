@@ -2,15 +2,9 @@ version: '3'
 
 services:
   pihole:
-    networks:
-      - public
     labels:
       - caddy="${FQDN}"
       - caddy.tls="internal"
       - caddy.reverse_proxy="{{upstreams 80}}"
       - caddy.@denied.not.remote_ip="private_ranges"
       - caddy.abort=@denied
-
-networks:
-  public:
-    external: true

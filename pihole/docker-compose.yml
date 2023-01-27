@@ -7,24 +7,22 @@ services:
     image: pihole/pihole:latest
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     ports:
-      - "${YOUR_IP}:53:53/tcp"
-      - "${YOUR_IP}:53:53/udp"
+      - "${YOUR_IP}:53:53"
       #- "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
       #- "80:80/tcp" #Using caddy
     environment:
       TZ: 'Europe/Madrid'
       WEBPASSWORD: '${PIHOLE_PASSWORD}'
-      DNSMASQ_LISTENING: 'all'
     # Volumes store your data between container upgrades
     volumes:
       - './data/etc-pihole:/etc/pihole'
       - './data/etc-dnsmasq.d:/etc/dnsmasq.d'
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    #cap_add:
-      #- NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
+    cap_add:
+      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
     restart: unless-stopped
     networks:
-      - public
+      public:
+        ipv4_address: 172.18.0.20
 
 networks:
   public:
