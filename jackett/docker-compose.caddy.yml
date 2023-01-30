@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  radarr:
+  jackett:
     networks:
       - public
     labels:
