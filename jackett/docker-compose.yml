@@ -12,4 +12,6 @@ services:
     volumes:
       - ./data/config:/config
       - /home/david/media/descargas:/downloads
+    expose:
+      - 9117 #Expose to the docker network to radarr and sonarr connections
     restart: unless-stopped
