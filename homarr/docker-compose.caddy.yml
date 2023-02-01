@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  homarr:
+    networks:
+      - public
+    labels:
+      - caddy="${FQDN}"
+      - caddy.reverse_proxy="{{upstreams 7575}}"
+
+networks:
+  public:
+    external: true
