@@ -1,0 +1,14 @@
+version: "2.1"
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+    volumes:
+      - ./data/config:/config
+      - /home/david/media/series:/tv #optional
+      - /home/david/media/descargas:/downloads #optional
+    restart: unless-stopped
