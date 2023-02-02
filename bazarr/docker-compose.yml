@@ -10,5 +10,6 @@ services:
     volumes:
       - ./data/config:/config
       - /home/david/media/peliculas:/movies #optional
+      - /home/david/media/series:/tv #optional
       - /home/david/media/descargas:/downloads #optional
     restart: unless-stopped
