@@ -1,15 +1,15 @@
 version: "3.8"
 services:
-  wireguard:
+  wg-easy:
     image: weejewel/wg-easy
     container_name: wireguard
     restart: unless-stopped
     environment:
-        WG_HOST: ${YOUR_IP}
+        WG_HOST: ${FQDN}
         PASSWORD: ${WG_PASSWORD}
         WG_DEFAULT_DNS: 172.18.0.20
         WG_DEFAULT_ADDRESS: 10.8.0.x
-        WG_ALLOWED_IPS: 10.8.0.0/24
+        WG_ALLOWED_IPS: 10.8.0.0/24, 172.18.0.0/24, 192.168.1.0/24
     volumes:
         - ./data/vpn/wireguard:/etc/wireguard
     ports:
@@ -22,7 +22,7 @@ services:
         - net.ipv4.conf.all.src_valid_mark=1
     networks:
       public:
-        ipv4_address: 172.18.0.10
+        ipv4_address: 172.18.0.21
       private:
 
 networks:
