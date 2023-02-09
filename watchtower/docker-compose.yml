@@ -2,6 +2,8 @@ version: "3"
 services:
   watchtower:
     image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -11,3 +13,9 @@ services:
       #- WATCHTOWER_NOTIFICATIONS=gotify
       #- WATCHTOWER_NOTIFICATION_GOTIFY_URL="https://my.gotify.tld/"
       #- WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN="SuperSecretToken"
+    networks:
+      - private
+
+networks:
+  private:
+    external: true
