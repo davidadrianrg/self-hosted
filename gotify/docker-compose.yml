@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  gotify:
+    image: gotify/server:latest
+    container_name: gotify
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - ./data:/app/data
+    networks:
+      - public
+    labels:
+      - com.centurylinklabs.watchtower.enable="false"
+      - com.centurylinklabs.watchtower.monitor-only="true"
+
+networks:
+  public:
+    external: true
