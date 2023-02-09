@@ -12,25 +12,4 @@ services:
     volumes:
       - ./data/config:/config
       - /home/david/media/descargas:/downloads
-    networks:
-      - private
     restart: unless-stopped
-
-  flaresolverr:
-    # DockerHub mirror flaresolverr/flaresolverr:latest
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
-    environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - TZ=Europe/Madrid
-    expose:
-      - 8191
-    networks:
-      - private
-    restart: unless-stopped 
-
-networks:
-  private:
-    external: true
