@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  prowlarr:
+    networks:
+      - public
+    labels:
+      - caddy="${FQDN}"
+      - caddy.tls="internal"
+      - caddy.reverse_proxy="{{upstreams 9696}}"
+      - caddy.@denied.not.remote_ip="private_ranges"
+      - caddy.abort=@denied
+
+networks:
+  public:
+    external: true
