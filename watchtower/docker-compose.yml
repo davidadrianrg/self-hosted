@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/localtime:/etc/localtime:ro
     environment:
     # By default update all containers automatically
       - WATCHTOWER_LABEL_ENABLE=false # Set to true for update only labeled containers (com.centurylinklabs.watchtower.enable=true)
