@@ -4,6 +4,7 @@ services:
   prowlarr:
     networks:
       - public
+      - private
     labels:
       - caddy="${FQDN}"
       - caddy.tls="internal"
@@ -13,4 +14,6 @@ services:
 
 networks:
   public:
+    external: true
+  private:
     external: true
