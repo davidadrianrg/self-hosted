@@ -13,11 +13,11 @@ services:
       - WATCHTOWER_MONITOR_ONLY=false # Set to true for monitor without update and optinally label containers with (com.centurylinklabs.watchtower.monitor-only=true)
       - WATCHTOWER_SCHEDULE=0 0 4 * * *
       - WATCHTOWER_NOTIFICATIONS=gotify
-      - WATCHTOWER_NOTIFICATION_GOTIFY_URL="${GOTIFY_URL}"
-      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN="${GOTIFY_TOKEN}"
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${GOTIFY_URL}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${GOTIFY_TOKEN}
     networks:
-      - private
+      - public
 
 networks:
-  private:
+  public:
     external: true
