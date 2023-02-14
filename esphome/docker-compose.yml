@@ -6,8 +6,6 @@ services:
     volumes:
       - ./data/config:/config
       - /etc/localtime:/etc/localtime:ro
-    expose:
-      - 6053 # Expose port for HA
     environment:
       - ESPHOME_DASHBOARD_USE_PING=true
     labels:
