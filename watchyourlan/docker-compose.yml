@@ -1,0 +1,18 @@
+version: "3"
+services:
+  watchyourlan:
+    image: aceberg/watchyourlan
+    container_name: watchyourlan
+    network_mode: "host"
+    restart: unless-stopped
+    volumes:
+    - ./data:/data
+    environment:
+      TZ: Europe/Madrid                 # required: needs your TZ for correct time
+      IFACE: "eno1"                     # required: 1 or more interface
+      DBPATH: "/data/db.sqlite"         # optional, default: /data/db.sqlite
+      GUIIP: "${YOUR_IP}"               # optional, default: localhost
+      GUIPORT: "8840"                   # optional, default: 8840
+      TIMEOUT: "120"                    # optional, time in seconds, default: 60
+      SHOUTRRR_URL: "${GOTIFY_URL}"     # optional, set url to notify
+      THEME: "darkly"                   # optional
