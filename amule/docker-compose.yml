@@ -11,8 +11,8 @@ services:
     environment:
       - WEBUI_TEMPLATE=AmuleWebUI-Reloaded
       - WEBUI_PWD=${AMULE_WEBUI_PWD}
-      - PUID=1000
-      - GUID=1000
+      - PUID=0
+      - GUID=0
     ports:
       - 4662:4662
       - 4672:4672/udp
