@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  jellyseerr:
+    networks:
+      - public
+    labels:
+      - caddy="${FQDN}"
+      - caddy.reverse_proxy="{{upstreams 5055}}"
+
+networks:
+  public:
+    external: true

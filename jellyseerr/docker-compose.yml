@@ -1,0 +1,11 @@
+version: '3'
+services:
+    jellyseerr:
+       image: fallenbagel/jellyseerr:latest
+       container_name: jellyseerr
+       environment:
+            - LOG_LEVEL=error
+            - TZ=Europe/Madrid
+       volumes:
+            - ./data/config:/app/config
+       restart: unless-stopped
