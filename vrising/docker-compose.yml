@@ -14,8 +14,8 @@ services:
       - '9876:9876/udp'
       - '9877:9877/udp'
     networks:
-      - gaming
+      - on_tcp
 
 networks:
-  gaming:
+  on_tcp:
     external: true

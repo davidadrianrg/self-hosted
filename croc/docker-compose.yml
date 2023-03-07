@@ -6,4 +6,6 @@ services:
        environment:
             - CROC_PASS=${CROC_PASSWORD}
             - TZ=Europe/Madrid
+       ports:
+            - 9009:9009
        restart: unless-stopped

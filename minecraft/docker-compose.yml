@@ -16,8 +16,8 @@ services:
     volumes:
       - ./data/minecraft_data:/data
     networks:
-      - gaming
+      - on_tcp
 
 networks:
-  gaming:
+  on_tcp:
     external: true
