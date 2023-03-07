@@ -1,0 +1,9 @@
+version: '3'
+services:
+    croc:
+       image: schollz/croc:master
+       container_name: croc
+       environment:
+            - CROC_PASS=${CROC_PASSWORD}
+            - TZ=Europe/Madrid
+       restart: unless-stopped

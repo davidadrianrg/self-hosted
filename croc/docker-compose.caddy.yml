@@ -1,0 +1,12 @@
+version: '3'
+services:
+  croc:
+    networks:
+      - public
+    labels:
+      - caddy="${FQDN}"
+      - caddy.reverse_proxy="{{upstreams 9009}}"
+
+networks:
+  public:
+    external: true
