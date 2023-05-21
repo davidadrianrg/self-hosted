@@ -8,8 +8,8 @@ services:
     volumes:
       - ./data/config:/config
       - /etc/localtime:/etc/localtime:ro
-    #devices:
-        #- /dev/zigbee #To add zigbee gateway
+    devices:
+        - /dev/ttyACM0 #To add zigbee gateway
     environment:
       - TZ=Europe/Madrid
     healthcheck:
