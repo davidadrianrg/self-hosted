@@ -1,0 +1,25 @@
+version: '3'
+services:
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    #labels:
+      #com.centurylinklabs.watchtower.monitor-only: "true" #To monitor with watchtower
+    volumes:
+      #- ./data/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./data/data:/mosquitto/data
+      - ./data/log:/mosquitto/log
+    expose:
+      - "1883/tcp"
+      - "9001/tcp"
+    environment:
+      - TZ=Europe/Madrid
+      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
+      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
+    networks:
+      - public
+    restart: unless-stopped
+
+networks:
+  public:
+    external: true
