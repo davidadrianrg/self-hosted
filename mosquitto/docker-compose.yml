@@ -6,7 +6,7 @@ services:
     #labels:
       #com.centurylinklabs.watchtower.monitor-only: "true" #To monitor with watchtower
     volumes:
-      #- ./data/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./data/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ./data/data:/mosquitto/data
       - ./data/log:/mosquitto/log
     expose:
