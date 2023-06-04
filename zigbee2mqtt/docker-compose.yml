@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+      - /run/udev:/run/udev:ro
+    environment:
+      - TZ=Europe/Madrid
+    devices:
+        - /dev/ttyACM0 #To add zigbee gateway
+    #labels:
+      #com.centurylinklabs.watchtower.monitor-only: "true" #To monitor with watchtower
