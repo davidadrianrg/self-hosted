@@ -5,10 +5,10 @@ services:
       - public
     labels:
       - caddy="${FQDN}"
-      - caddy.tls="internal"
+      #- caddy.tls="internal"
       - caddy.reverse_proxy="{{upstreams 8123}}"
-      - caddy.@denied.not.remote_ip="private_ranges"
-      - caddy.abort=@denied
+      #- caddy.@denied.not.remote_ip="private_ranges"
+      #- caddy.abort=@denied
 
 networks:
   public:
