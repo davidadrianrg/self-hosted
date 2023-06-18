@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  webdav:
+    container_name: webdav
+    image: ugeek/webdav:amd64
+    expose:
+      - "80"
+    volumes:
+      - /home/david/media:/media
+    environment:
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+      - UID=1000
+      - GID=1000
+      - TZ=Europe/Madrid

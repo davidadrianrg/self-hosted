@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  webdav:
+    networks:
+      - public
+    labels:
+      - caddy="${FQDN}"
+      - caddy.reverse_proxy="{{upstreams 80}}"
+      - caddy.tls="internal"
+      - caddy.@denied.not.remote_ip="private_ranges"
+      - caddy.abort=@denied
+
+networks:
+  public:
+    external: true
