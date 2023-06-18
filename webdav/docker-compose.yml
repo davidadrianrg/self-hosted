@@ -4,8 +4,8 @@ services:
   webdav:
     container_name: webdav
     image: ugeek/webdav:amd64
-    expose:
-      - "80"
+    ports:
+      - "9000:80"
     volumes:
       - /home/david/media:/media
     environment:
