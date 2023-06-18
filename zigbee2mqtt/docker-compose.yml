@@ -10,6 +10,6 @@ services:
     environment:
       - TZ=Europe/Madrid
     devices:
-        - /dev/ttyACM0 #To add zigbee gateway
+        - /dev/ttyUSB0 #To add zigbee gateway
     #labels:
       #com.centurylinklabs.watchtower.monitor-only: "true" #To monitor with watchtower

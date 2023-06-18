@@ -18,3 +18,5 @@ services:
       timeout: 60s
       retries: 2
     restart: unless-stopped
+    ports:
+      - "8123:8123"
