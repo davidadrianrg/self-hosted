@@ -4,6 +4,7 @@ services:
   webdav:
     container_name: webdav
     image: ugeek/webdav:amd64
+    restart: unless-stopped
     ports:
       - "9000:80"
     volumes:
