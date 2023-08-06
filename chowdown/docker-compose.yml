@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  chowdown:
+   image: gregyankovoy/chowdown:latest
+   container_name: chowdown
+   restart: unless-stopped
+   volumes:
+    - ./data/config/:/config

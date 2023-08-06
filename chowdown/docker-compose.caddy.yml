@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  chowdown:
+    networks:
+      - public
+    labels:
+      - caddy="${FQDN}"
+      - caddy.reverse_proxy="{{upstreams 4000}}"
+
+networks:
+  public:
+    external: true
