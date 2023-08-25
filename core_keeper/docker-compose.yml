@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  core_keeper:
+    image: quay.io/tedtramonte/core-keeper-server:latest
+    container_name: core_keeper
+    restart: unless-stopped
+    # Only needed if using DIRECT_CONNECT=1
+    # ports:
+    #   - "9090:27015"
+    # Adjust configuration as desired
+    environment:
+      WORLD_NAME: "La Caverna de Platón"
+      WORLD_MODE: 0
+    #   WORLD_SEED: "12345"
+    #   GAME_ID: "AGameId"
+      MAX_PLAYERS: 10
+    volumes:
+      - ./data/core_keeper_data:/data
+    networks:
+      - on_tcp
+
+networks:
+  on_tcp:
+    external: true
