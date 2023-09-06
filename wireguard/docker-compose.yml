@@ -22,7 +22,6 @@ services:
         - net.ipv4.conf.all.src_valid_mark=1
     networks:
       public:
-        ipv4_address: 172.18.0.21
       private:
 
 networks:
