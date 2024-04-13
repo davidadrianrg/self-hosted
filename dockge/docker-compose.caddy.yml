@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  amule:
+  dockge:
     networks:
       - public
     labels:
