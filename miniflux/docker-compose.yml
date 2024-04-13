@@ -13,7 +13,7 @@ services:
     env_file:
       - .env
   db:
-    image: postgres:latest
+    image: postgres:15
     container_name: miniflux_db
     restart: unless-stopped
     init: true

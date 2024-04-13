@@ -9,4 +9,5 @@ services:
     restart: unless-stopped
     volumes:
       - ./data/configs:/app/data/configs
+      - ./data/data:/data
       - ./data/icons:/app/public/icons

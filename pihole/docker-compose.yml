@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     networks:
       public:
-        ipv4_address: 172.18.0.20
+        #ipv4_address: 172.18.0.20
 
 networks:
   public:
