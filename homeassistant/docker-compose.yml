@@ -8,6 +8,7 @@ services:
     volumes:
       - ./data/config:/config
       - /etc/localtime:/etc/localtime:ro
+      - ./data/root_ssh:/root/.ssh
     #devices:
         #- /dev/ttyACM0 #To add zigbee gateway
     environment:
