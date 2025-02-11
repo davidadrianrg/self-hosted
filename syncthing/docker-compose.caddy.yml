@@ -1,0 +1,11 @@
+services:
+  syncthing:
+    networks:
+      - public
+    labels:
+      - caddy="${FQDN}"
+      - caddy.reverse_proxy="{{upstreams 8384}}"
+
+networks:
+  public:
+    external: true
